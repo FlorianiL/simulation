@@ -103,6 +103,9 @@ def generator(n: int = 1):
         c = numbers[i + y]
         z = (a * seed + c) % 10
         res = math.sqrt(x ** 2 + y ** 2 + z ** 2)
+        while res > 1:
+            res = res/10
+
         yield res
 
 
