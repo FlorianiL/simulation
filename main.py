@@ -96,7 +96,8 @@ def generator(n: int = 1):
     for i in range(n):
         seed = numbers[i]
         a = len(numbers)-seed
-        res.append((a*seed)%10)
+        c = numbers[i+seed]
+        res.append((a*seed+c)%10)
 
     print(f"generator {res}")
     return None
