@@ -9,8 +9,8 @@ import random
 
 
 @lru_cache(5)
-def count_numbers():
-    cnt = Counter(e_numbers())
+def count_numbers(data_):
+    cnt = Counter(data_)
     keys = list(sorted(cnt.keys()))
     vals = [cnt[key] for key in keys]
     return keys, vals
@@ -27,8 +27,7 @@ def e_numbers():
                 yield int(c)
 
 
-def construct_histo():
-    keys, vals = count_numbers()
+def construct_histo(keys, vals):
     fig, ax = plot.subplots()
     ax.bar(keys, vals)
     plot.show()
@@ -77,35 +76,40 @@ def gap_test(number_sequence, a: int = 0, b: int = 5, total_numbers: int = 10):
         sequence_length += 1
     cnt = Counter(intervals)
     keys = list(sorted(cnt.keys()))
-    observed = [total_for_I_0] + [cnt[key] for key in range(1, max(keys)+1)]
+    observed = [total_for_I_0] + [cnt[key] for key in range(1, max(keys) + 1)]
     keys = [0] + keys
     observed = np.array(observed) / sequence_length
 
     # compare the observerd distribution to the theorical expected distribution
-    expected = np.array([probability ** (n+1) for n in range(max(keys)+1)])
-    expected = cumsum(expected)         # cumulative distribution function
+    expected = np.array([probability ** (n + 1) for n in range(max(keys) + 1)])
+    expected = cumsum(expected)  # cumulative distribution function
     observed = cumsum(observed)
-    kr = sum(((observed-expected)**2)/expected)
-    crit = stat.chi2.ppf(q=0.05, df=len(observed)-1)
+    kr = sum(((observed - expected) ** 2) / expected)
+    crit = stat.chi2.ppf(q=0.05, df=len(observed) - 1)
     return kr <= crit, kr, crit
 
 
 def generator(n: int = 1):
     numbers = list(e_numbers())
-    res = []
     for i in range(n):
         seed = numbers[i]
-        a = len(numbers)-seed
-        c = numbers[i+seed]
-        res.append((a*seed+c)%10)
-
-    print(f"generator {res}")
-    return None
+        a = len(numbers) - seed
+        c = numbers[i + seed]
+        x = (a * seed + c) % 10
+        a = len(numbers) - x
+        c = numbers[i + x]
+        y = (a * seed + c) % 10
+        a = len(numbers) - y
+        c = numbers[i + y]
+        z = (a * seed + c) % 10
+        res = math.sqrt(x ** 2 + y ** 2 + z ** 2)
+        yield res
 
 
 if __name__ == '__main__':
-    # construct_histo()
-    labels, data = count_numbers()
+    # construct_histo(count_numbers())
+    labels, data = count_numbers(e_numbers())
+    print(e_numbers())
     effect_th = sum(data) / 10
     print(f"Test Chi, Carré notre popotte magique : {chi_squared(data)}")
     print(f"Test Chi Carré de Numpy : {stat.chisquare(data, [effect_th for _ in range(10)], ddof=9)}")
@@ -113,5 +117,5 @@ if __name__ == '__main__':
     print(f"Test KS de Numpy : {stat.kstest(list(map(lambda x: x / sum(data), data)), stat.uniform.cdf)}")
     print(f"Test Gap, notre popotte magique : {gap_test(e_numbers())}")
     print(f"Test Gap, notre popotte magique : {gap_test([1 for _ in range(2000000)])}")
-    print(f"Génération avec Python : {[random.randint(0, 9) for n in range(1000)]}")
-    generator(1000)
+    print(f"Génération avec Python : {[random.random() for n in range(1000)]}")
+    print(f"Notre générateur : {list(generator(1000))}")
