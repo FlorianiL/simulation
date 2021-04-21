@@ -90,6 +90,18 @@ def gap_test(number_sequence, a: int = 0, b: int = 5, total_numbers: int = 10):
     return kr <= crit, kr, crit
 
 
+def generator(n: int = 1):
+    numbers = list(e_numbers())
+    res = []
+    for i in range(n):
+        seed = numbers[i]
+        a = len(numbers)-seed
+        res.append((a*seed)%10)
+
+    print(f"generator {res}")
+    return None
+
+
 if __name__ == '__main__':
     # construct_histo()
     labels, data = count_numbers()
@@ -100,3 +112,5 @@ if __name__ == '__main__':
     print(f"Test KS de Numpy : {stat.kstest(list(map(lambda x: x / sum(data), data)), stat.uniform.cdf)}")
     print(f"Test Gap, notre popotte magique : {gap_test(e_numbers())}")
     print(f"Test Gap, notre popotte magique : {gap_test([1 for _ in range(2000000)])}")
+    print(f"Génération avec Python : {[random.randint(0, 9) for n in range(1000)]}")
+    generator(1000)
