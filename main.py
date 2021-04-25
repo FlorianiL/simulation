@@ -115,9 +115,9 @@ if __name__ == '__main__':
     print(e_numbers())
     effect_th = sum(data) / 10
     print(f"Test Chi, Carré notre popotte magique : {chi_squared(data)}")
-    print(f"Test Chi Carré de Numpy : {stat.chisquare(data, [effect_th for _ in range(10)], ddof=9)}")
+    print(f"Test Chi Carré de Scipy : {stat.chisquare(data, [effect_th for _ in range(10)], ddof=9)}")
     print(f"Test KS, notre popotte magique : {kolmogorov_smirnov(data, labels)}")
-    print(f"Test KS de Numpy : {stat.kstest(list(map(lambda x: x / sum(data), data)), stat.uniform.cdf)}")
+    print(f"Test KS de Scipy : {stat.kstest(list(map(lambda x: x / sum(data), data)), stat.uniform.cdf)}")
     print(f"Test Gap, notre popotte magique : {gap_test(e_numbers())}")
     print(f"Test Gap, notre popotte magique : {gap_test([1 for _ in range(2000000)])}")
     print(f"Génération avec Python : {[random.random() for n in range(1000)]}")
