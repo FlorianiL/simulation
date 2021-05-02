@@ -34,6 +34,8 @@ def split_in_groups(data):
             i += 0.1
             res.append(count)
             count = 0
+    if count != 0 and len(res) == 0:
+        res.append(count)
     return np.array(res)
 
 
