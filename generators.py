@@ -6,6 +6,7 @@ from main import open_file
 
 e_numbers = np.array(list(open_file()))
 
+
 class Generator1:
 
     def __init__(self, seed=0, nb_digits=10):
