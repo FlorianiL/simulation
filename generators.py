@@ -72,4 +72,4 @@ class Generator3:
                 bits += 1
 
             self.index = (self.index + 1) % len(e_numbers)
-        return abs(generated / 2 ** self.precision)
+        return generated / 2 ** self.precision

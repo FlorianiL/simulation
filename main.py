@@ -53,9 +53,11 @@ if __name__ == '__main__':
     rng1 = Generator1(50)
     rng2 = Generator2(50)
     rng3 = Generator3(50)
-    gen_numbers_1 = [rng1.random() for _ in range(100)]
-    gen_numbers_2 = [rng2.random() for _ in range(100)]
-    gen_numbers_3 = [rng3.random() for _ in range(100)]
+    gen_numbers_1 = [rng1.random() for _ in range(2000)]
+    gen_numbers_2 = [rng2.random() for _ in range(2000)]
+    gen_numbers_3 = [rng3.random() for _ in range(2000)]
+
+    print(gen_numbers_3)
     print(f"Résultats des générateurs : \n"
           f"Générateur 1 : {gen_numbers_1} \n"
           f"Générateur 2 : {gen_numbers_2} \n"
