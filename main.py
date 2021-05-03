@@ -1,7 +1,7 @@
 import random
 from matplotlib import pyplot as plt
 
-from chi_squarred import chi_squared_uniform, chi_squared_continuous
+from chi_squarred import chi_squared_uniform, chi_squared_continuous, split_in_groups
 from gap import gap_test_discrete, gap_test_continue
 from kolmogorov_smirnov import kolmogorov_smirnov
 from poker import poker_test
@@ -41,8 +41,8 @@ if __name__ == '__main__':
           f"{chi_squared_uniform(e_counts)}")
 
     ### Test du Poker
-    print(f"Test du Poker pour les décimales : \n"
-          f"{poker_test(e_numbers)}")
+    #print(f"Test du Poker pour les décimales : \n"
+    #      f"{poker_test(e_numbers)}")
 
     ### Test du gap
     print(f"Test du Gap pour les décimales : \n "
@@ -57,11 +57,10 @@ if __name__ == '__main__':
     gen_numbers_2 = [rng2.random() for _ in range(2000)]
     gen_numbers_3 = [rng3.random() for _ in range(2000)]
 
-    print(gen_numbers_3)
     print(f"Résultats des générateurs : \n"
-          f"Générateur 1 : {gen_numbers_1} \n"
-          f"Générateur 2 : {gen_numbers_2} \n"
-          f"Générateur 3 : {gen_numbers_3} \n")
+          f"Générateur 1 : {split_in_groups(gen_numbers_1)} \n"
+          f"Générateur 2 : {split_in_groups(gen_numbers_2)} \n"
+          f"Générateur 3 : {split_in_groups(gen_numbers_3)} \n")
 
     ### Test du Chi Carré
     print(f"Test du Chi Carré de nos générateurs : \n"
