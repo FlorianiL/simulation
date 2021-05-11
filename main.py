@@ -19,7 +19,6 @@ def open_file():
 
 
 if __name__ == '__main__':
-
     ## Répartition des décimales d’exponentielle
     ### Premier aperçu
     e_numbers = np.array(list(open_file()))
@@ -49,6 +48,12 @@ if __name__ == '__main__':
           f"{gap_test_discrete(e_numbers, 0, 5)}")
 
     ## Générateurs de nombres aléatoires
+
+    ### Comparaison avec le générateur de Python
+    python_numbers = []
+    for _ in range(2000):
+        python_numbers.append(random.uniform(0, 1))
+
     ### Techniques employées
     rng1 = Generator1(50)
     rng2 = Generator2(50)
@@ -67,25 +72,22 @@ if __name__ == '__main__':
     print(f"Test du Chi Carré de nos générateurs : \n"
           f"1 --> {chi_squared_continuous(gen_numbers_1)} \n"
           f"2 --> {chi_squared_continuous(gen_numbers_2)} \n"
-          f"3 --> {chi_squared_continuous(gen_numbers_3)}")
+          f"3 --> {chi_squared_continuous(gen_numbers_3)} \n"
+          f"Python -- > {chi_squared_continuous(python_numbers)}")
 
     ### Test de Kolmogorov-Smirnov
     print(f"Test de Kolmogorov-Smirnov pour notre générateur : \n"
           f"1 --> {kolmogorov_smirnov(gen_numbers_1)} \n"
           f"2 --> {kolmogorov_smirnov(gen_numbers_2)} \n"
-          f"3 --> {kolmogorov_smirnov(gen_numbers_3)}")
+          f"3 --> {kolmogorov_smirnov(gen_numbers_3)} \n"
+          f"Python --> {kolmogorov_smirnov(python_numbers)}")
 
     ### Test du gap
     print(f"Test du gap pour notre générateur : \n"
           f"1 --> {gap_test_continue(gen_numbers_1, 0.0, 0.5)} \n"
           f"2 --> {gap_test_continue(gen_numbers_2, 0.0, 0.5)} \n"
-          f"3 --> {gap_test_continue(gen_numbers_3, 0.0, 0.5)}")
-
-    ### Comparaison avec le générateur de Python
-    python_numbers = []
-    quantity = len(gen_numbers_1)
-    for _ in range(quantity):
-        python_numbers.append(random.uniform(0, 1))
+          f"3 --> {gap_test_continue(gen_numbers_3, 0.0, 0.5)} \n"
+          f"Python --> {gap_test_continue(python_numbers, 0.0, 0.5)}")
 
     plt.figure()
     plt.hist(gen_numbers_1, color='palegreen', histtype='barstacked')
