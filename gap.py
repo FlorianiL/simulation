@@ -33,22 +33,22 @@ def gap_test_discrete(data, a: int = 0, b: int = 5, total_numbers: int = 10):
 def complete_labels(labels, observed):
     res_labels = []
     res_observed = []
-    n = 0
     j = 0
+    i = 0
     for expected in range(1, np.max(labels) + 1):
-        label = labels[j - n]
+        label = labels[i]
         if expected != label:
             res_labels.append(expected)
             res_observed.append(0)
-            n += 1
         else:
             res_labels.append(label)
-            res_observed.append(observed[j - n])
+            res_observed.append(observed[i])
             j += 1
+            i += 1
     return res_observed
 
 
-def gap_test_continue(data, a = 0.0, b = 0.5):
+def gap_test_continue(data, a=0.0, b=0.5):
     assert a < b
     proba = b - a  # => proba 1/2 d'être marqué
     return gap_test(data, proba, a, b)

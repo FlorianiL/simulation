@@ -44,10 +44,10 @@ class Generator2:
 
 class Generator3:
 
-    def __init__(self, seed=0, precision=57):
+    def __init__(self, seed=0, precision=53):
         self.seed = seed
         self.index = seed % len(e_numbers)
-        self.precision = precision  # IEE754 double has 57 bits of precision
+        self.precision = precision  # IEE754 double has 53 bits of precision
 
     def random(self):
         bits = 0

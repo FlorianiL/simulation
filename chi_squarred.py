@@ -23,19 +23,19 @@ def chi_squarred_poker(observed, N):  # P(all_diff) > P(one_pair) > P(triplet) >
 
 
 def split_in_groups(data):
+    labels = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     data = np.sort(data)
     i = 0
     count = 0
     res = []
     for d in data:
-        if i <= d < (i + 0.1):
+        if labels[i] <= d < labels[i+1]:
             count += 1
         else:
-            i += 0.1
+            i += 1
             res.append(count)
             count = 0
-    if count != 0 and len(res) == 0:
-        res.append(count)
+    res.append(count)
     return np.array(res)
 
 
